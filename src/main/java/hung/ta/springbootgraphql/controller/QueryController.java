@@ -8,6 +8,7 @@ import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
+import hung.ta.springbootgraphql.datafetcher.AddressDataFetcher;
 import hung.ta.springbootgraphql.datafetcher.AllPeopleDataFetcher;
 import hung.ta.springbootgraphql.datafetcher.PersonDataFetcher;
 import org.slf4j.Logger;
@@ -42,6 +43,9 @@ public class QueryController {
     @Autowired
     private PersonDataFetcher personDataFetcher;
 
+    @Autowired
+    private AddressDataFetcher addressDataFetcher;
+
     @PostConstruct
     public void loadSchema() throws IOException {
         File schemaFile = schemaResource.getFile();
@@ -56,6 +60,8 @@ public class QueryController {
                 .type("Query", typeWriting -> typeWriting
                         .dataFetcher("allPeople", allPeopleDataFetcher)
                         .dataFetcher("person", personDataFetcher))
+                .type("Person", typeWriting -> typeWriting
+                        .dataFetcher("addresses", addressDataFetcher))
                 .build();
     }
 

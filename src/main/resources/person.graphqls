@@ -12,4 +12,14 @@ type Person {
     firstName: String
     lastName: String
     age: Int
+    addresses: [Address]
+}
+
+type Address {
+    id: String
+    street: String
+    block: String
+    region: String
+    country: String
+    zip: String
 }
