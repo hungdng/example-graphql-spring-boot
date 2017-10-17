@@ -1,0 +1,15 @@
+schema {
+    query: Query
+}
+
+type Query {
+    allPeople: [Person]
+    person(id: String): Person
+}
+
+type Person {
+    id: String
+    firstName: String
+    lastName: String
+    age: Int
+}
